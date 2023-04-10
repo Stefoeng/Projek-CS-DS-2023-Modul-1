@@ -98,7 +98,7 @@ def decryption2(decryptelang):
 pesan={'macan':['QNKXGT!CPF$MCM@MTKUVCN$HQTGXC'] , 
        'rubah':['UXEDK!DNDQ@PHQJXDVDL@GXQLD'] , 
        'elang': ['RKETEMR@OEQY@FEGE!MRM$LECS$HEWEV#OITS']}
-original={'log1':'Nama tengahnya Pak Jokowi adala'}
+original={'log1':'Nama tengahnya Pak Jokowi adal'}
 
 
 
@@ -145,21 +145,21 @@ while True:
                             macan(inkripsi)
                             secret1=macan(inkripsi)
                             pesan['macan'].append(secret1)
-                            del original[label]
+                            
                             print(f'pesan berhasil terinkripsi, inkripsi berupa: {secret1} telah masuk di daftar dan terhapus dari daftar original')
                             break
                         elif enigma=='rubah' or enigma=='2':
                             rubah(inkripsi)
                             secret2=rubah(inkripsi)
                             pesan['rubah'].append(secret2)
-                            del original[label]
+                            
                             print(f'pesan berhasil terinkripsi, inkripsi berupa: {secret2} telah masuk di daftar dan terhapus dari daftar original')
                             break
                         elif enigma=='elang' or enigma=='3':
                             elang(inkripsi)
                             secret3=elang(inkripsi)
                             pesan['elang'].append(secret3)
-                            del original[label]
+                            
                             print(f'pesan berhasil terinkripsi, inkripsi berupa: {secret3} telah masuk di daftar dan terhapus dari daftar original')
                             break
                         else:
@@ -172,64 +172,70 @@ while True:
                         print(f'{i+1}. {name}')
                     pilihpesan=input('Silahkan pilih nama jenis atau nomor enigma dari daftar: ').lower()
                     if pilihpesan=='macan' or pilihpesan=='1':
+                        print('Berikut adalah daftar pesan yang terdaftar dengan enigma macan:')
                         for i,code in enumerate(pesan['macan']):
-                            print(f'Berikut adalah daftar pesan yang terdaftar dengan enigma macan: \n {i+1}. {code}\n')
-                            macanpilih=int(input('Pilihlah nomor pesan yang anda inginkan: '))
-                            decryptmacan=pesan['macan'][macanpilih-1]
-                            print(f'Pesan tersiratnya adalah: \n{decryption(decryptmacan)}')
-                            tigdec=decryption(decryptmacan)
-                            while True:
-                                mau=input('Apakah anda ingin memasukan pesan kedalam daftar pesan original? Y/N: ').lower()
-                                if mau=='y':
-                                    label=input('silahkan masukkan label pesan: ')
-                                    original[label]=tigdec
-                                    print(f'pesan {decryptmacan} dengan label {label} telah berhasil masuk ke daftar')
-                                    break
-                                elif mau=='n':
-                                    print('Pesan telah dihapuskan selamanya...')
-                                    break
-                                else:
-                                    print('Tolong jawab dengan Y atau N')
+                            print(f'{i+1}. {code}\n')
+                        macanpilih=int(input('Pilihlah nomor pesan yang anda inginkan: '))
+                        decryptmacan=pesan['macan'][macanpilih-1]
+                        print(f'Pesan tersiratnya adalah: \n{decryption(decryptmacan)}')
+                        tigdec=decryption(decryptmacan)
+                        while True:
+                            mau=input('Apakah anda ingin memasukan pesan kedalam daftar pesan original? Y/N: ').lower()
+                            if mau=='y':
+                                label=input('silahkan masukkan label pesan: ')
+                                original[label]=tigdec
+                                del pesan['macan'][macanpilih-1]
+                                print(f'pesan {decryptmacan} dengan label {label} telah berhasil masuk ke daftar dan terhapus dari daftar inkripsi')
+                                break
+                            elif mau=='n':
+                                print('Pesan telah dihapuskan selamanya...')
+                                break
+                            else:
+                                print('Tolong jawab dengan Y atau N')
                         break
                     elif pilihpesan=='rubah' or pilihpesan=='2':
+                        print('Berikut adalah daftar pesan yang terdaftar dengan enigma rubah: ')
                         for i,code in enumerate(pesan['rubah']):
-                            print(f'Berikut adalah daftar pesan yang terdaftar dengan enigma rubah: \n {i+1}. {code}\n')
-                            rubahpilih=int(input('Pilihlah nomor pesan yang anda inginkan: '))
-                            decryptrubah=pesan['rubah'][rubahpilih-1]
-                            print(f'Pesan tersiratnya adalah: \n{decryption1(decryptrubah)}')
-                            foxdec=decryption1(decryptrubah)
-                            while True:
-                                mau=input('Apakah anda ingin memasukan pesan kedalam daftar pesan original? Y/N: ').lower()
-                                if mau=='y':
-                                    label=input('silahkan masukkan label pesan: ')
-                                    original[label]=foxdec
-                                    print(f'pesan {decryptrubah} dengan label {label} telah berhasil masuk ke daftar')
-                                    break
-                                elif mau=='n':
-                                    print('Pesan telah dihapuskan selamanya...')
-                                    break
-                                else:
-                                    print('Tolong jawab dengan Y atau N')
+                            print(f'{i+1}. {code}\n')
+                        rubahpilih=int(input('Pilihlah nomor pesan yang anda inginkan: '))
+                        decryptrubah=pesan['rubah'][rubahpilih-1]
+                        print(f'Pesan tersiratnya adalah: \n{decryption1(decryptrubah)}')
+                        foxdec=decryption1(decryptrubah)
+                        while True:
+                            mau=input('Apakah anda ingin memasukan pesan kedalam daftar pesan original? Y/N: ').lower()
+                            if mau=='y':
+                                label=input('silahkan masukkan label pesan: ')
+                                original[label]=foxdec
+                                del pesan['rubah'][rubahpilih-1]
+                                print(f'pesan {decryptrubah} dengan label {label} telah berhasil masuk ke daftar dan terhapus dari daftar inkripsi')
+                                break
+                            elif mau=='n':
+                                print('Pesan telah dihapuskan selamanya...')
+                                break
+                            else:
+                                print('Tolong jawab dengan Y atau N')
                         break
                     elif pilihpesan=='elang' or pilihpesan=='3':
+                        print('Berikut adalah daftar pesan yang terdaftar dengan enigma elang: ')
                         for i,code in enumerate(pesan['elang']):
-                            print(f'Berikut adalah daftar pesan yang terdaftar dengan enigma elang: \n {i+1}. {code}\n')
-                            elangpilih=int(input('Pilihlah nomor pesan yang anda inginkan: '))
-                            decryptelang=pesan['elang'][elangpilih-1]
-                            print(f'Pesan tersiratnya adalah: \n{decryption2(decryptelang)}')
-                            eagdec=decryption2(decryptelang)
-                            while True:
-                                mau=input('Apakah anda ingin memasukan pesan kedalam daftar pesan original? Y/N: ').lower()
-                                if mau=='y':
-                                    label=input('silahkan masukkan label pesan: ')
-                                    original[label]=eagdec
-                                    print(f'pesan {decryptelang} dengan label {label} telah berhasil masuk ke daftar')
-                                    break
-                                elif mau=='n':
-                                    print('Pesan telah dihapuskan selamanya...')
-                                    break
-                                else:
-                                    print('Tolong jawab dengan Y atau N')
+                            print(f'{i+1}. {code}\n')
+                        elangpilih=int(input('Pilihlah nomor pesan yang anda inginkan: '))
+                        decryptelang=pesan['elang'][elangpilih-1]
+                        print(f'Pesan tersiratnya adalah: \n{decryption2(decryptelang)}')
+                        eagdec=decryption2(decryptelang)
+                        while True:
+                            mau=input('Apakah anda ingin memasukan pesan kedalam daftar pesan original? Y/N: ').lower()
+                            if mau=='y':
+                                label=input('silahkan masukkan label pesan: ')
+                                original[label]=eagdec
+                                del pesan['macan'][elangpilih-1]
+                                print(f'pesan {decryptelang} dengan label {label} telah berhasil masuk ke daftar dan terhapus dari daftar inkripsi')
+                                break
+                            elif mau=='n':
+                                print('Pesan telah dihapuskan selamanya...')
+                                break
+                            else:
+                                print('Tolong jawab dengan Y atau N')
                         break             
                     else:
                         print('Tolong masukkan nama enigma yang benar!')
